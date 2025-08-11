@@ -1,4 +1,5 @@
 import { Star, Award, Clock } from "lucide-react";
+import { motion } from "framer-motion";
 import therapist1 from "@/assets/therapist-1.jpg";
 import therapist2 from "@/assets/therapist-2.jpg";
 import therapist3 from "@/assets/therapist-3.jpg";
@@ -46,26 +47,68 @@ const TherapistSection = () => {
     }
   ];
 
+  // Faster heading rise
+  const fadeUpFast = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
+  };
+
+  // Normal fade-up for rest
+  const fadeUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+  };
+
+  const containerStagger = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
   return (
     <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 font-heading">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+          className="text-center mb-16"
+        >
+          <motion.h2
+            variants={fadeUpFast}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 font-heading"
+          >
             Meet Our Expert <span className="text-teal-primary">Therapists</span>
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Our licensed therapists are here to help you on your journey to better mental health. 
+          </motion.h2>
+
+          <motion.p
+            variants={fadeUp}
+            transition={{ delay: 0.15 }}
+            className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+          >
+            Our licensed therapists are here to help you on your journey to better mental health.
             Each specialist brings unique expertise and compassionate care.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Therapist Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          variants={containerStagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.8 }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {therapists.map((therapist) => (
-            <div
+            <motion.div
               key={therapist.id}
-              className="bg-white rounded-3xl p-6 shadow-card hover:shadow-soft transition-all duration-300 border border-border/20 group"
+              variants={fadeUp}
+              whileHover={{ scale: 1.03 }} // Smooth size increase
+              transition={{ type: "spring", stiffness: 600, damping: 15 }}
+              className="bg-white rounded-3xl p-6 border border-border/20 shadow-sm hover:shadow-lg hover:border-teal-primary/40 transition-all duration-300 group"
             >
               {/* Therapist Image */}
               <div className="relative mb-6">
@@ -76,7 +119,7 @@ const TherapistSection = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                
+
                 {/* Availability Badge */}
                 <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
                   <div className="bg-green-soft text-teal-dark px-3 py-1 rounded-full text-xs font-medium border border-green-soft/50">
@@ -123,7 +166,7 @@ const TherapistSection = () => {
                       {therapist.experience}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center justify-center space-x-2">
                     <Award className="w-4 h-4 text-teal-primary" />
                     <span className="text-sm text-muted-foreground">
@@ -154,15 +197,21 @@ const TherapistSection = () => {
                   View Profile
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* View All Therapists Button */}
         <div className="text-center mt-12">
-          <button className="bg-white text-teal-primary border-2 border-teal-primary py-3 px-8 rounded-xl font-medium hover:bg-teal-primary hover:text-white transition-all duration-300 shadow-soft">
+          <motion.button
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            className="bg-white text-teal-primary border-2 border-teal-primary py-3 px-8 rounded-xl font-medium hover:bg-teal-primary hover:text-white transition-all duration-300 shadow-soft"
+          >
             View All Therapists
-          </button>
+          </motion.button>
         </div>
       </div>
     </section>

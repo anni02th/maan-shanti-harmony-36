@@ -10,9 +10,9 @@ const Header = () => {
             <div className="w-8 h-8 bg-gradient-teal rounded-lg flex items-center justify-center">
               <div className="w-4 h-4 bg-white rounded-sm"></div>
             </div>
-            <span className="text-xl font-bold text-teal-primary font-heading">
+            <a href="#" className="text-xl font-bold text-teal-primary font-heading cursor-pointer">
               MaanShanti
-            </span>
+            </a>
           </div>
 
           {/* Navigation */}
