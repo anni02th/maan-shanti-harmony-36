@@ -1,57 +1,13 @@
 import { Button } from "@/components/ui/button";
-import anxietyPerson from "@/assets/anxiety-person-new.jpg";
-import depressionPerson from "@/assets/depression-person-new.jpg";
-import traumaPerson from "@/assets/trauma-person-new.jpg";
-import personalNeedsPerson from "@/assets/personal-needs-new.jpg";
 import { motion } from "framer-motion";
+import heroVideo from "@/assets/meditation.mp4"; // <-- add your video file here
 
 const HeroSection = () => {
-  const emotionalStates = [
-    {
-      image: depressionPerson,
-      label: "Depressed",
-      bgColor: "bg-yellow-soft",
-      shape: "rounded-3xl",
-    },
-    {
-      image: anxietyPerson,
-      label: "Anxiety",
-      bgColor: "bg-green-soft",
-      shape: "rounded-full",
-    },
-    {
-      image: traumaPerson,
-      label: "Lost & Trauma",
-      bgColor: "bg-teal-light",
-      shape: "rounded-2xl",
-    },
-    {
-      image: personalNeedsPerson,
-      label: "Personal needs",
-      bgColor: "bg-orange-soft",
-      shape: "rounded-3xl",
-    },
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-  };
-
   return (
     <section className="min-h-screen bg-gradient-hero flex items-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          
           {/* Left Content */}
           <motion.div
             className="space-y-8"
@@ -80,9 +36,7 @@ const HeroSection = () => {
               </h1>
 
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
-                Feeling stressed, anxious or depressed? Check your mood and
-                anxiety with our free online test. Online evidence-based
-                programs to help improve the way you feel.
+                Feeling stressed, anxious or depressed? Check your mood and anxiety with our free online test. Online evidence-based programs to help improve the way you feel.
               </p>
             </div>
 
@@ -97,60 +51,29 @@ const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* Right Visual Grid */}
+          {/* Right Section with Video */}
           <motion.div
-            className="relative"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+            className="relative rounded-3xl overflow-hidden shadow-xl"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="grid grid-cols-2 gap-4 md:gap-6">
-              {emotionalStates.map((state, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "0px 8px 25px rgba(0,0,0,0.15)",
-                  }}
-                  className={`relative ${state.bgColor} ${state.shape} p-4 md:p-6 shadow-card transition-all duration-300 group`}
-                >
-                  {/* Label Tag */}
-                  <div className="absolute -top-3 left-4 bg-white px-3 py-1 rounded-full text-xs font-medium text-foreground shadow-soft border border-border/20">
-                    {state.label}
-                  </div>
-
-                  {/* Image */}
-                  <div className="aspect-square overflow-hidden rounded-xl">
-                    <motion.img
-                      src={state.image}
-                      alt={state.label}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ duration: 0.4 }}
-                    />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Decorative Elements */}
-            <motion.div
-              className="absolute -top-4 -right-4 w-8 h-8 border-2 border-teal-primary rounded rotate-45 opacity-60"
-              animate={{ y: [2, -6, 0] }}
-              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+            <video
+              src={heroVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
             />
+            {/* Optional decorative element */}
             <motion.div
               className="absolute -bottom-6 -left-6 w-6 h-6 bg-orange-soft rounded-full opacity-70"
               animate={{ y: [0, 6, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             />
-            <motion.div
-              className="absolute top-1/2 -right-8 w-4 h-4 bg-yellow-soft rounded-full opacity-60"
-              animate={{ y: [0, -4, 0] }}
-              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-            />
           </motion.div>
+
         </div>
       </div>
     </section>
