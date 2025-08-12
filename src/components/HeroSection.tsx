@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-// Removed heroVideo import since we no longer have the video
 import React, { useEffect, useState, useRef } from "react";
+import meditation from "@/assets/meditation.png";
+import shadow from "@/assets/shadow.png";
 
-// ---- Code from Temp.js ----
+// ---- Animation styles for ovals ----
 const ovalStyles = `
 @keyframes rotate-cw {
   to { transform: rotate(360deg); }
@@ -21,9 +22,6 @@ const ovalStyles = `
   animation: rotate-cw 10s linear infinite;
 }
 `;
-
-import meditation from "@/assets/meditation.png";
-import shadow from "@/assets/shadow.png";
 
 const TEMP_SIZE = 600;
 const NUM_CIRCLES = 10;
@@ -53,28 +51,16 @@ const TempVisual = () => {
     let animationFrame;
 
     const animate = () => {
-      setCircles((prev) =>
+      setCircles(prev =>
         prev.map(({ x, y, vx, vy, size }) => {
           let newX = x + vx;
           let newY = y + vy;
 
-          // bounce at edges
-          if (newX < 0) {
-            newX = 0;
-            vx = -vx;
-          } else if (newX > TEMP_SIZE - size) {
-            newX = TEMP_SIZE - size;
-            vx = -vx;
-          }
-          if (newY < 0) {
-            newY = 0;
-            vy = -vy;
-          } else if (newY > TEMP_SIZE - size) {
-            newY = TEMP_SIZE - size;
-            vy = -vy;
-          }
+          if (newX < 0) { newX = 0; vx = -vx; }
+          else if (newX > TEMP_SIZE - size) { newX = TEMP_SIZE - size; vx = -vx; }
+          if (newY < 0) { newY = 0; vy = -vy; }
+          else if (newY > TEMP_SIZE - size) { newY = TEMP_SIZE - size; vy = -vy; }
 
-          // smooth random turn
           const angleChange = (Math.random() - 0.5) * 0.1;
           let speed = Math.sqrt(vx * vx + vy * vy);
           let angle = Math.atan2(vy, vx);
@@ -82,7 +68,6 @@ const TempVisual = () => {
           vx = speed * Math.cos(angle);
           vy = speed * Math.sin(angle);
 
-          // clamp speed
           if (speed > MAX_SPEED) {
             speed = MAX_SPEED;
             vx = speed * Math.cos(angle);
@@ -100,51 +85,24 @@ const TempVisual = () => {
   }, []);
 
   return (
-    <div className="relative w-96 h-96 flex justify-center flex-col gap-16">
+    <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 flex justify-center flex-col gap-16">
       <style>{ovalStyles}</style>
 
       {/* Rotating Ovals */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div
-          className="oval-cw absolute"
-          style={{
-            width: "420px",
-            height: "210px",
-            borderRadius: "50% / 50%",
-            border: "3px solid #81e6d9",
-            opacity: 0.5,
-          }}
-        />
-        <div
-          className="oval-ccw absolute"
-          style={{
-            width: "420px",
-            height: "210px",
-            borderRadius: "50% / 50%",
-            border: "3px dashed #4fd1c5",
-            opacity: 0.5,
-          }}
-        />
-        <div
-          className="oval-cw2 absolute"
-          style={{
-            width: "420px",
-            height: "210px",
-            borderRadius: "50% / 50%",
-            border: "3px solid #4fd1c5",
-            opacity: 0.5,
-          }}
-        />
+        <div className="oval-cw absolute"
+          style={{ width: "100%", height: "50%", borderRadius: "50% / 50%", border: "3px solid #81e6d9", opacity: 0.5 }} />
+        <div className="oval-ccw absolute"
+          style={{ width: "100%", height: "50%", borderRadius: "50% / 50%", border: "3px dashed #4fd1c5", opacity: 0.5 }} />
+        <div className="oval-cw2 absolute"
+          style={{ width: "80%", height: "40%", borderRadius: "50% / 50%", border: "3px solid #4fd1c5", opacity: 0.5 }} />
       </div>
 
       {/* Moving Circles */}
-      <div
-        className="absolute top-[-100px] left-[-100px] pointer-events-none"
-        style={{ width: TEMP_SIZE, height: TEMP_SIZE }}
-      >
+      <div className="absolute pointer-events-none"
+        style={{ width: TEMP_SIZE, height: TEMP_SIZE, top: "-100px", left: "-100px" }}>
         {circles.map(({ x, y, size }, i) => (
-          <div
-            key={i}
+          <div key={i}
             style={{
               position: "absolute",
               width: size,
@@ -154,45 +112,34 @@ const TempVisual = () => {
               opacity: 0.75,
               transform: `translate(${x}px, ${y}px)`,
               transition: "transform 0.05s linear",
-            }}
-          />
+            }} />
         ))}
       </div>
 
       {/* Meditation image and shadow */}
-      <img
-        src={meditation}
-        alt="Meditation"
-        className="w-96 mx-auto z-10 animate-float"
-        style={{ position: "relative" }}
-      />
-      <img
-        src={shadow}
-        alt="Shadow"
-        className="bottom-0 w-96 mx-auto animate-shadow"
-        style={{ position: "relative" }}
-      />
+      <img src={meditation} alt="Meditation"
+        className="w-56 sm:w-72 md:w-96 mx-auto z-10 animate-float"
+        style={{ position: "relative" }} />
+      <img src={shadow} alt="Shadow"
+        className="bottom-0 w-40 sm:w-56 md:w-72 mx-auto animate-shadow"
+        style={{ position: "relative" }} />
     </div>
   );
 };
-// ---- End of Temp.js code ----
 
-
-// Now HeroSection using TempVisual on the right
 const HeroSection = () => {
   return (
-    <section className="min-h-screen bg-gradient-hero flex items-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="min-h-screen bg-gradient-hero flex items-center py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
           
           {/* Left Content */}
           <motion.div
-            className="space-y-8"
+            className="space-y-6 text-center lg:text-left"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {/* Badge */}
             <motion.div
               className="inline-flex items-center px-4 py-2 bg-teal-light/50 border border-teal-primary/20 rounded-full text-sm text-teal-dark font-medium"
               initial={{ scale: 0.8, opacity: 0 }}
@@ -202,23 +149,17 @@ const HeroSection = () => {
               No.1 Mental Health Support Platform
             </motion.div>
 
-            {/* Main Heading */}
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight font-heading">
-                Deserve and
-                <br />
-                <span className="text-teal-primary">Embrace Your</span>
-                <br />
-                Peace
+            <div className="space-y-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight font-heading">
+                Deserve and <br />
+                <span className="text-teal-primary">Embrace Your</span> <br /> Peace
               </h1>
-
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md mx-auto lg:mx-0">
                 Feeling stressed, anxious or depressed? Check your mood and anxiety with our free online test. Online evidence-based programs to help improve the way you feel.
               </p>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
               <Button variant="hero" size="lg" className="rounded-xl px-8">
                 Get Started
               </Button>
@@ -228,7 +169,7 @@ const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* Right Section replaced with Temp Visual */}
+          {/* Right Section with TempVisual */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
