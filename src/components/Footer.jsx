@@ -1,5 +1,6 @@
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,19 +9,19 @@ const Footer = () => {
     {
       title: "Services",
       links: [
-        { name: "Individual Therapy", href: "#" },
-        { name: "Couples Counseling", href: "#" },
-        { name: "Family Therapy", href: "#" },
-        { name: "Group Sessions", href: "#" },
-        { name: "Crisis Support", href: "#" },
+        { name: "Individual Therapy", href: "/services" },
+        { name: "Couples Counseling", href: "/services" },
+        { name: "Family Therapy", href: "/services" },
+        { name: "Group Sessions", href: "/services" },
+        { name: "Crisis Support", href: "/services" },
       ]
     },
     {
       title: "Resources",
       links: [
-        { name: "Mental Health Blog", href: "#" },
-        { name: "Self-Help Tools", href: "#" },
-        { name: "Meditation Guides", href: "#" },
+        { name: "Mental Health Assessment", href: "/questionnaire" },
+        { name: "Find Therapists", href: "/therapists" },
+        { name: "Book Appointment", href: "/book-appointment" },
         { name: "Emergency Resources", href: "#" },
         { name: "Insurance Guide", href: "#" },
       ]
@@ -38,8 +39,8 @@ const Footer = () => {
     {
       title: "Company",
       links: [
-        { name: "About Us", href: "#" },
-        { name: "Our Mission", href: "#" },
+        { name: "About Us", href: "/about" },
+        { name: "Our Mission", href: "/about" },
         { name: "Privacy Policy", href: "#" },
         { name: "Terms of Service", href: "#" },
         { name: "Contact Us", href: "#" },
@@ -61,7 +62,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-teal-dark text-white">
+    <footer className="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-8 min-h-screene">
       {/* Main Footer Content */}
       <motion.div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
@@ -75,9 +76,9 @@ const Footer = () => {
           <motion.div variants={fadeUp} className="lg:col-span-2 space-y-6">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-md">
-                <Heart className="w-6 h-6 text-teal-primary" />
+                <Heart className="w-6 h-6 text-blue-500" />
               </div>
-              <span className="text-2xl font-bold font-heading">MaanShanti</span>
+              <span className="text-2xl font-bold">MaanShanti</span>
             </div>
 
             <p className="text-white/80 leading-relaxed max-w-md">
@@ -88,15 +89,15 @@ const Footer = () => {
 
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <Phone className="w-4 h-4 text-teal-light" />
+                <Phone className="w-4 h-4 text-blue-400" />
                 <span className="text-white/80">+91 1800-123-4567</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="w-4 h-4 text-teal-light" />
+                <Mail className="w-4 h-4 text-blue-400" />
                 <span className="text-white/80">support@maanshanti.com</span>
               </div>
               <div className="flex items-center space-x-3">
-                <MapPin className="w-4 h-4 text-teal-light" />
+                <MapPin className="w-4 h-4 text-blue-400" />
                 <span className="text-white/80">Mumbai, Delhi, Bangalore</span>
               </div>
             </div>
@@ -118,16 +119,16 @@ const Footer = () => {
           {/* Footer Links */}
           {footerSections.map((section) => (
             <motion.div key={section.title} variants={fadeUp} className="space-y-4">
-              <h3 className="text-lg font-semibold font-heading">{section.title}</h3>
+              <h3 className="text-lg font-semibold">{section.title}</h3>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.href}
                       className="text-white/70 hover:text-white transition-colors duration-300 relative after:absolute after:left-0 after:bottom-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-white after:transition-all after:duration-300"
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -138,7 +139,7 @@ const Footer = () => {
 
       {/* Emergency Support Banner */}
       <motion.div
-        className="bg-orange-soft text-teal-dark"
+        className="bg-orange-100 text-gray-900"
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
@@ -154,7 +155,7 @@ const Footer = () => {
               <a href="tel:9152987821" className="font-bold hover:underline">
                 📞 91529-87821 (Crisis Line)
               </a>
-              <button className="bg-teal-primary text-white px-4 py-2 rounded-lg hover:bg-teal-dark transition-all duration-300 hover:scale-105">
+              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 hover:scale-105">
                 Get Help Now
               </button>
             </div>
@@ -163,7 +164,7 @@ const Footer = () => {
       </motion.div>
 
       {/* Bottom Footer */}
-      <div className="bg-teal-primary/20 border-t border-white/10">
+      <div className="bg-gray-800/50 border-t border-white/10">
         <motion.div
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6"
           variants={fadeUp}
@@ -196,4 +197,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default Footer; 
