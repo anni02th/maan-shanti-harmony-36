@@ -151,8 +151,7 @@ const HeroSection = () => {
 
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight font-heading">
-                Deserve and <br />
-                <span className="text-teal-primary">Embrace Your</span> <br /> Peace
+                Deserve and<span className="text-teal-primary"> Embrace Your</span> Peace
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md mx-auto lg:mx-0">
                 Feeling stressed, anxious or depressed? Check your mood and anxiety with our free online test. Online evidence-based programs to help improve the way you feel.
