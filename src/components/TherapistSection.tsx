@@ -17,7 +17,7 @@ const TherapistSection = () => {
       credentials: ["PhD Psychology", "Licensed Therapist"],
       languages: ["English", "Hindi", "Punjabi"],
       approach: "Cognitive Behavioral Therapy (CBT)",
-      availability: "Available Today"
+      availability: "Available Today",
     },
     {
       id: 2,
@@ -30,7 +30,7 @@ const TherapistSection = () => {
       credentials: ["MA Clinical Psychology", "Certified Counselor"],
       languages: ["English", "Gujarati", "Hindi"],
       approach: "Mindfulness-Based Therapy",
-      availability: "Available Tomorrow"
+      availability: "Available Tomorrow",
     },
     {
       id: 3,
@@ -43,50 +43,38 @@ const TherapistSection = () => {
       credentials: ["PhD Clinical Psychology", "EMDR Certified"],
       languages: ["English", "Hindi", "Bengali"],
       approach: "EMDR & Trauma-Focused Therapy",
-      availability: "Available This Week"
-    }
+      availability: "Available This Week",
+    },
   ];
 
-  // Faster heading rise
-  const fadeUpFast = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
-  };
-
-  // Normal fade-up for rest
+  // Animation variants
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
-  };
-
-  const containerStagger = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.15 }
-    }
+    visible: { opacity: 1, y: 0 },
   };
 
   return (
     <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ staggerChildren: 0.15 }}
           className="text-center mb-16"
         >
           <motion.h2
-            variants={fadeUpFast}
+            variants={fadeUp}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 font-heading"
           >
             Meet Our Expert <span className="text-teal-primary">Therapists</span>
           </motion.h2>
-
           <motion.p
             variants={fadeUp}
-            transition={{ delay: 0.15 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
             className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
           >
             Our licensed therapists are here to help you on your journey to better mental health.
@@ -96,18 +84,20 @@ const TherapistSection = () => {
 
         {/* Therapist Cards Grid */}
         <motion.div
-          variants={containerStagger}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.8 }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.15 } },
+          }}
         >
           {therapists.map((therapist) => (
             <motion.div
               key={therapist.id}
               variants={fadeUp}
-              whileHover={{ scale: 1.03 }} // Smooth size increase
-              transition={{ type: "spring", stiffness: 600, damping: 15 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              whileHover={{ scale: 1.03 }}
               className="bg-white rounded-3xl p-6 border border-border/20 shadow-sm hover:shadow-lg hover:border-teal-primary/40 transition-all duration-300 group"
             >
               {/* Therapist Image */}
@@ -166,7 +156,6 @@ const TherapistSection = () => {
                       {therapist.experience}
                     </span>
                   </div>
-
                   <div className="flex items-center justify-center space-x-2">
                     <Award className="w-4 h-4 text-teal-primary" />
                     <span className="text-sm text-muted-foreground">
@@ -201,13 +190,13 @@ const TherapistSection = () => {
           ))}
         </motion.div>
 
-        {/* View All Therapists Button */}
+        {/* View All Button */}
         <div className="text-center mt-12">
           <motion.button
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="bg-white text-teal-primary border-2 border-teal-primary py-3 px-8 rounded-xl font-medium hover:bg-teal-primary hover:text-white transition-all duration-300 shadow-soft"
           >
             View All Therapists
