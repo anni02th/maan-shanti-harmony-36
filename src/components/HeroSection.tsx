@@ -95,7 +95,7 @@ const TempVisual = () => {
         <div className="oval-ccw absolute"
           style={{ width: "100%", height: "50%", borderRadius: "50% / 50%", border: "3px dashed #4fd1c5", opacity: 0.5 }} />
         <div className="oval-cw2 absolute"
-          style={{ width: "80%", height: "40%", borderRadius: "50% / 50%", border: "3px solid #4fd1c5", opacity: 0.5 }} />
+          style={{ width: "100%", height: "50%", borderRadius: "50% / 50%", border: "3px solid #4fd1c5", opacity: 0.5 }} />
       </div>
 
       {/* Moving Circles */}
