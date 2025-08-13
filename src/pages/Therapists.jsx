@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Search, Filter, MapPin, Star, Clock, MessageCircle, Calendar, Users } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import heroImg from "../assets/header-therapists.jpg";
 
 const Therapists = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -109,52 +110,61 @@ const Therapists = () => {
 
   const filteredTherapists = therapists.filter(therapist => {
     const matchesSearch = therapist.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         therapist.specialization.toLowerCase().includes(searchTerm.toLowerCase());
+      therapist.specialization.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesLocation = !selectedLocation || therapist.location === selectedLocation;
     const matchesIssue = !selectedIssue || therapist.issues.includes(selectedIssue);
     const matchesLanguage = !selectedLanguage || therapist.languages.includes(selectedLanguage);
-    
+
     return matchesSearch && matchesLocation && matchesIssue && matchesLanguage;
   });
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="pt-24 pb-16 bg-gradient-hero"
+        className="pt-24 pb-16 relative overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1 
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroImg})` }}
+        />
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
+
+        {/* Text Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-6xl font-bold text-foreground mb-6 font-heading"
+            className="text-5xl md:text-6xl font-bold text-white mb-6 font-heading"
           >
             Find Your Therapist
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-muted-foreground max-w-3xl mx-auto"
+            className="text-xl text-white/90 max-w-3xl mx-auto"
           >
-            Connect with experienced mental health professionals who can guide you 
+            Connect with experienced mental health professionals who can guide you
             on your journey to healing and personal growth.
           </motion.p>
         </div>
       </motion.div>
-
       {/* Search and Filters */}
       <section className="py-12 bg-card border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             {/* Search Bar */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -174,7 +184,7 @@ const Therapists = () => {
             </motion.div>
 
             {/* Filters */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -221,7 +231,7 @@ const Therapists = () => {
       {/* Therapists Grid */}
       <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -247,7 +257,7 @@ const Therapists = () => {
                 <div className="h-48 bg-gradient-teal flex items-center justify-center">
                   <Users className="w-24 h-24 text-white" />
                 </div>
-                
+
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
                     <div>
@@ -309,7 +319,7 @@ const Therapists = () => {
           </div>
 
           {filteredTherapists.length === 0 && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="text-center py-16"
@@ -327,7 +337,7 @@ const Therapists = () => {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-teal">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -335,7 +345,7 @@ const Therapists = () => {
           >
             <h2 className="text-4xl font-bold text-white mb-6 font-heading">Need Help Finding the Right Therapist?</h2>
             <p className="text-xl text-teal-light mb-8 max-w-2xl mx-auto">
-              Our team can help you find the perfect match based on your specific needs, 
+              Our team can help you find the perfect match based on your specific needs,
               preferences, and circumstances.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

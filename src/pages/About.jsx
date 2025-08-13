@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Heart, Target, Users, Award, Shield, Globe } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import about_img from "../assets/header-about.jpg";
 
 const About = () => {
   const teamMembers = [
@@ -53,32 +54,42 @@ const About = () => {
       <Header />
       
       {/* Hero Section */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="pt-24 pb-16 bg-gradient-hero"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-6xl font-bold text-foreground mb-6 font-heading"
-          >
-            About Maan Shanti
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-muted-foreground max-w-3xl mx-auto"
-          >
-            Dedicated to bringing peace and harmony to your mental well-being through compassionate, 
-            evidence-based therapy and holistic healing approaches.
-          </motion.p>
-        </div>
-      </motion.div>
+      <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="pt-24 pb-16 relative overflow-hidden"
+>
+  {/* Background Image */}
+  <div
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={{ backgroundImage: `url(${about_img})` }}
+  ></div>
+
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black/40"></div>
+
+  {/* Content */}
+  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <motion.h1
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      className="text-5xl md:text-6xl font-bold text-white mb-6 font-heading"
+    >
+      About Maan Shanti
+    </motion.h1>
+    <motion.p
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+      className="text-xl text-white/90 max-w-3xl mx-auto"
+    >
+      Dedicated to bringing peace and harmony to your mental well-being through compassionate,
+      evidence-based therapy and holistic healing approaches.
+    </motion.p>
+  </div>
+</motion.div>
 
       {/* Mission & Vision */}
       <section className="py-20 bg-background">

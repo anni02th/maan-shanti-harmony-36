@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Brain, Heart, Users, Shield, ArrowRight, CheckCircle, Circle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import service_img from "../assets/header-about.jpg"; // Updated import path
+import service_img from "../assets/header-advice.jpg"; // Updated import path
 
 const Questionnaire = () => {
   const navigate = useNavigate();
