@@ -29,7 +29,7 @@ const Contact = () => {
       <div className="pt-24 pb-16 relative overflow-hidden">
         {/* Background Image Layer */}
         <div
-          className="absolute inset-0 bg-cover bg-bottom bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-no-repeat bg-right md:bg-bottom"
           style={{ backgroundImage: `url(${heroImg})` }}
         ></div>
 

@@ -131,7 +131,7 @@ const Services = () => {
       >
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-no-repeat bg-left lg:bg-center"
           style={{ backgroundImage: `url(${service_img})` }}
         />
         {/* Overlay */}
