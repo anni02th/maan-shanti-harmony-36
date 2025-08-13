@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import React, { useEffect, useState, useRef } from "react";
 import meditation from "@/assets/meditation.png";
 import shadow from "@/assets/shadow.png";
@@ -66,7 +66,7 @@ const TempVisual = () => {
           let angle = Math.atan2(vy, vx);
           angle += angleChange;
           vx = speed * Math.cos(angle);
-          vy = speed * Math.sin(angle);
+          vy = speed * Math.cos(angle);
 
           if (speed > MAX_SPEED) {
             speed = MAX_SPEED;
@@ -129,7 +129,7 @@ const TempVisual = () => {
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen bg-gradient-hero flex items-center py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-14 gap-x-8 lg:gap-y-0 lg:gap-x-20 items-center">
           
@@ -141,7 +141,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <motion.div
-              className="inline-flex items-center px-4 py-2 bg-teal-light/50 border border-teal-primary/20 rounded-full text-sm text-teal-dark font-medium"
+              className="inline-flex items-center px-4 py-2 bg-blue-100 border border-blue-200 rounded-full text-sm text-blue-800 font-medium"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -150,21 +150,35 @@ const HeroSection = () => {
             </motion.div>
 
             <div className="space-y-4">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight font-heading">
-                Deserve and<span className="text-teal-primary"> Embrace Your</span> Peace
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                Deserve and<span className="text-blue-600"> Embrace Your</span> Peace
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md mx-auto lg:mx-0">
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-md mx-auto lg:mx-0">
                 Feeling stressed, anxious or depressed? Check your mood and anxiety with our free online test. Online evidence-based programs to help improve the way you feel.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-              <Button variant="hero" size="lg" className="rounded-xl px-8">
+              <Link
+                to="/questionnaire"
+                className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 text-center"
+              >
+                Take Assessment
+              </Link>
+              <Link
+                to="/auth"
+                className="border-2 border-blue-500 text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-colors text-center"
+              >
                 Get Started
-              </Button>
-              <Button variant="hero-outline" size="lg" className="rounded-xl px-8">
-                Log In
-              </Button>
+              </Link>
+            </div>
+
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4 text-sm text-gray-600">
+              <Link to="/services" className="hover:text-blue-600 transition-colors">Our Services</Link>
+              <span>•</span>
+              <Link to="/therapists" className="hover:text-blue-600 transition-colors">Find Therapists</Link>
+              <span>•</span>
+              <Link to="/about" className="hover:text-blue-600 transition-colors">About Us</Link>
             </div>
           </motion.div>
 
@@ -183,4 +197,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default HeroSection; 
