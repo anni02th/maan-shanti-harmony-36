@@ -14,7 +14,7 @@ const StatsSection = () => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-      if (!startWhenVisible) return; // Don't start until visible
+      if (!startWhenVisible) return;
       let start = 0;
       const increment = end / (duration / 16);
       const timer = setInterval(() => {
@@ -32,11 +32,47 @@ const StatsSection = () => {
     return count;
   };
 
+  // Typing animation logic
+  const headingPhrases = [
+    "The world's largest therapy service",
+    "India's trusted therapy service",
+    "Your personal therapy service"
+  ];
+
+  const [displayText, setDisplayText] = useState("");
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentPhrase = headingPhrases[phraseIndex];
+
+    if (!isDeleting && charIndex <= currentPhrase.length) {
+      // Typing forward
+      setTimeout(() => {
+        setDisplayText(currentPhrase.substring(0, charIndex));
+        setCharIndex(charIndex + 1);
+      }, 80);
+    } else if (isDeleting && charIndex >= 0) {
+      // Deleting backward
+      setTimeout(() => {
+        setDisplayText(currentPhrase.substring(0, charIndex));
+        setCharIndex(charIndex - 1);
+      }, 50);
+    } else if (!isDeleting && charIndex > currentPhrase.length) {
+      // Pause before deleting
+      setTimeout(() => setIsDeleting(true), 1500);
+    } else if (isDeleting && charIndex < 0) {
+      // Move to next phrase
+      setIsDeleting(false);
+      setPhraseIndex((prev) => (prev + 1) % headingPhrases.length);
+    }
+  }, [charIndex, isDeleting, phraseIndex]);
+
   return (
-     <section className="bg-gradient-teal text-white py-16 md:py-20 overflow-hidden">
+    <section className="bg-gradient-teal text-white py-16 md:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          
           {/* Left Content */}
           <motion.div
             className="space-y-8"
@@ -54,9 +90,9 @@ const StatsSection = () => {
 
             <div className="space-y-6">
               <h2 className="text-4xl md:text-5xl font-bold leading-tight font-heading">
-                The world's largest
-                <br />
-                therapy service
+                <span className="border-r-4 border-yellow-soft pr-1">
+                  {displayText}
+                </span>
                 <br />
                 <span className="text-yellow-soft">100% online.</span>
               </h2>
