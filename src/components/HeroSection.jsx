@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import React, { useRef } from "react";
+import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
+import React, { useRef,useState, useEffect } from "react";
+import {  } from "react";
 import classNames from "classnames";
 
 // Import or define your emotion images here
@@ -124,8 +125,17 @@ const ParallaxCard = ({ children }) => {
     </motion.div>
   );
 };
+const words = ["Embrace Your", "Feel Your", "See Your", "Learn About"];
 
 const HeroSection = () => {
+    const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 2500); // change every 2 seconds
+    return () => clearInterval(interval);
+  }, []);
   return (
     <>
       <GlobalStyles />
@@ -148,14 +158,28 @@ const HeroSection = () => {
                 No.1 Mental Health Support Platform
               </motion.div>
 
-              <div className="space-y-4">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight font-heading">
-                  Deserve and<span className="text-teal-primary"> Embrace Your</span> Peace
-                </h1>
-                <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md mx-auto lg:mx-0">
-                  Feeling stressed, anxious or depressed? Check your mood and anxiety with our free online test. Online evidence-based programs to help improve the way you feel.
-                </p>
-              </div>
+      <div className="space-y-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight font-heading">
+          Deserve and{" "}
+            <AnimatePresence mode="wait">
+              <motion.span className="text-teal-primary inline-block relative"
+                key={words[index]}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                {words[index]}
+              </motion.span>
+            </AnimatePresence>
+{" "} <br />
+          Peace
+        </h1>
+        <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md mx-auto lg:mx-0">
+          Feeling stressed, anxious or depressed? Check your mood and anxiety with our free online test. Online
+          evidence-based programs to help improve the way you feel.
+        </p>
+      </div>
 
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
                 <Button variant="hero" size="lg" className="rounded-xl px-8">
