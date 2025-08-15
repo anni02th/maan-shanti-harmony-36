@@ -8,51 +8,51 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 99%;
-    --foreground: 198 32% 15%;
+    --background: 252 252 252;
+    --foreground: 26 43 50;
 
-    --card: 0 0% 100%;
-    --card-foreground: 198 32% 15%;
+    --card: 255 255 255;
+    --card-foreground: 26 43 50;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 198 32% 15%;
+    --popover: 255 255 255;
+    --popover-foreground: 26 43 50;
 
-    --primary: 178 54% 32%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 38 126 123;
+    --primary-foreground: 255 255 255;
 
-    --secondary: 48 88% 84%;
-    --secondary-foreground: 198 32% 15%;
+    --secondary: 250 236 178;
+    --secondary-foreground: 26 43 50;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
 
-    --accent: 26 85% 74%;
-    --accent-foreground: 198 32% 15%;
+    --accent: 245 181 132;
+    --accent-foreground: 26 43 50;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 239 68 68;
+    --destructive-foreground: 248 250 252;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 178 54% 32%;
+    --border: 226 232 240;
+    --input: 226 232 240;
+    --ring: 38 126 123;
 
     /* Custom MaanShanti Design Tokens */
-    --teal-primary: 178 54% 32%;
-    --teal-light: 178 34% 88%;
-    --teal-dark: 178 54% 20%;
-    --yellow-soft: 48 88% 84%;
-    --orange-soft: 26 85% 74%;
-    --green-soft: 142 71% 73%;
+    --teal-primary: 31 132 112;
+    --teal-light: 214 235 234;
+    --teal-dark: 23 79 77;
+    --yellow-soft: 250 236 178;
+    --orange-soft: 245 181 132;
+    --green-soft: 137 235 173;
     
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(var(--teal-light)));
-    --gradient-teal: linear-gradient(135deg, hsl(var(--teal-dark)), hsl(var(--teal-primary)));
-    --gradient-soft: linear-gradient(180deg, hsl(var(--background)), hsl(210 40% 98%));
+    --gradient-hero: linear-gradient(135deg, rgb(var(--background)), rgb(var(--teal-light)));
+    --gradient-teal: linear-gradient(135deg, rgb(var(--teal-dark)), rgb(var(--teal-primary)));
+    --gradient-soft: linear-gradient(180deg, rgb(var(--background)), rgb(241 245 249));
     
     /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(var(--teal-primary) / 0.15);
-    --shadow-card: 0 8px 30px -8px hsl(var(--teal-primary) / 0.12);
-    --shadow-button: 0 6px 20px -6px hsl(var(--teal-primary) / 0.25);
+    --shadow-soft: 0 4px 20px -4px rgb(var(--teal-primary) / 0.15);
+    --shadow-card: 0 8px 30px -8px rgb(var(--teal-primary) / 0.12);
+    --shadow-button: 0 6px 20px -6px rgb(var(--teal-primary) / 0.25);
     
     /* Typography */
     --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -60,61 +60,56 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 250 250 250;
+    --sidebar-foreground: 63 63 70;
+    --sidebar-primary: 24 24 27;
+    --sidebar-primary-foreground: 250 250 250;
+    --sidebar-accent: 244 244 245;
+    --sidebar-accent-foreground: 24 24 27;
+    --sidebar-border: 229 231 235;
+    --sidebar-ring: 59 130 246;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 2 8 23;
+    --foreground: 248 250 252;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 2 8 23;
+    --card-foreground: 248 250 252;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 2 8 23;
+    --popover-foreground: 248 250 252;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 248 250 252;
+    --primary-foreground: 15 23 42;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 30 41 59;
+    --secondary-foreground: 248 250 252;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 30 41 59;
+    --muted-foreground: 148 163 184;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 30 41 59;
+    --accent-foreground: 248 250 252;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 127 29 29;
+    --destructive-foreground: 248 250 252;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 30 41 59;
+    --input: 30 41 59;
+    --ring: 203 213 225;
+
+    --sidebar-background: 24 24 27;
+    --sidebar-foreground: 244 244 245;
+    --sidebar-primary: 29 78 216;
+    --sidebar-primary-foreground: 255 255 255;
+    --sidebar-accent: 39 39 42;
+    --sidebar-accent-foreground: 244 244 245;
+    --sidebar-border: 39 39 42;
+    --sidebar-ring: 59 130 246;
   }
 }
+
 
 @layer base {
   * {

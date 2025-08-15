@@ -33,7 +33,7 @@ const StatsSection = () => {
   };
 
   return (
-    <section className="bg-gradient-teal text-white py-16 md:py-20 overflow-hidden">
+     <section className="bg-gradient-teal text-white py-16 md:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
