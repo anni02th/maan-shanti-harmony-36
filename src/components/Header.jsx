@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, User, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
@@ -8,6 +8,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Mock login state
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navigation = [
     { name: "Business", href: "/services" },
@@ -86,6 +87,7 @@ const Header = () => {
                 </Link>
                 <Button
                   variant="hero"
+                  onClick={() => navigate("/questionnaire")}
                   className="rounded-full px-6 font-semibold bg-teal-200 text-teal-dark border-none hover:bg-teal-light shadow transition-all"
                 >
                   Get Started
@@ -162,7 +164,7 @@ const Header = () => {
                       Sign In
                     </Link>
                     <Link
-                      to="/auth"
+                      to="/questionnaire"
                       onClick={() => setIsMenuOpen(false)}
                       className="block mt-2 px-4 py-2 bg-teal-200 text-teal-dark rounded-lg font-semibold text-center shadow"
                     >
