@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Brain, Heart, Users, Shield, ArrowRight, CheckCircle, Circle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import service_img from "../assets/header-advice.jpg"; // Updated import path
 
 const Questionnaire = () => {
   const navigate = useNavigate();
@@ -194,36 +195,46 @@ const Questionnaire = () => {
 
   const currentQuestion = questions[currentStep];
   const hasAnswer = answers[currentQuestion.id];
-  const canProceed = currentQuestion.type === "single" ? hasAnswer : 
-                     currentQuestion.type === "multiple" ? (hasAnswer && hasAnswer.length > 0) : true;
+  const canProceed = currentQuestion.type === "single" ? hasAnswer :
+    currentQuestion.type === "multiple" ? (hasAnswer && hasAnswer.length > 0) : true;
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="pt-24 pb-16 bg-gradient-to-br from-green-50 to-blue-100"
+        className="pt-24 pb-16 bg-gradient-to-br from-green-50 to-blue-100 relative overflow-hidden"
       >
-        <div className="container mx-auto px-4 text-center">
-          <motion.h1 
+        {/* Background Image Layer */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${service_img})`, zIndex: 0 }}
+        />
+
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/40 pointer-events-none z-10"></div>
+
+        {/* Content Layer */}
+        <div className="relative container mx-auto px-4 text-center z-20">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
+            className="text-5xl md:text-6xl font-bold text-white mb-6"
           >
             Mental Health Assessment
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-gray-600 max-w-3xl mx-auto"
+            className="text-xl text-white max-w-3xl mx-auto"
           >
-            Take this brief assessment to help us understand your needs and 
+            Take this brief assessment to help us understand your needs and
             connect you with the right therapist and resources.
           </motion.p>
         </div>
@@ -242,7 +253,7 @@ const Questionnaire = () => {
               </span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <motion.div 
+              <motion.div
                 className="bg-gradient-to-r from-blue-500 to-green-500 h-2 rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
@@ -294,11 +305,10 @@ const Questionnaire = () => {
                           onChange={() => handleAnswer(currentQuestion.id, option)}
                           className="sr-only"
                         />
-                        <div className={`w-5 h-5 rounded-full border-2 mr-4 flex items-center justify-center ${
-                          answers[currentQuestion.id] === option 
-                            ? 'border-blue-500 bg-blue-500' 
-                            : 'border-gray-300'
-                        }`}>
+                        <div className={`w-5 h-5 rounded-full border-2 mr-4 flex items-center justify-center ${answers[currentQuestion.id] === option
+                          ? 'border-blue-500 bg-blue-500'
+                          : 'border-gray-300'
+                          }`}>
                           {answers[currentQuestion.id] === option && (
                             <div className="w-2 h-2 bg-white rounded-full"></div>
                           )}
@@ -327,11 +337,10 @@ const Questionnaire = () => {
                           }}
                           className="sr-only"
                         />
-                        <div className={`w-5 h-5 rounded border-2 mr-4 flex items-center justify-center ${
-                          answers[currentQuestion.id]?.includes(option)
-                            ? 'border-blue-500 bg-blue-500' 
-                            : 'border-gray-300'
-                        }`}>
+                        <div className={`w-5 h-5 rounded border-2 mr-4 flex items-center justify-center ${answers[currentQuestion.id]?.includes(option)
+                          ? 'border-blue-500 bg-blue-500'
+                          : 'border-gray-300'
+                          }`}>
                           {answers[currentQuestion.id]?.includes(option) && (
                             <CheckCircle className="w-3 h-3 text-white" />
                           )}
@@ -354,11 +363,10 @@ const Questionnaire = () => {
                           onChange={() => handleAnswer(currentQuestion.id, option)}
                           className="sr-only"
                         />
-                        <div className={`p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 ${
-                          answers[currentQuestion.id] === option
-                            ? 'border-blue-500 bg-blue-50 text-blue-700'
-                            : 'border-gray-200 hover:border-gray-300'
-                        }`}>
+                        <div className={`p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 ${answers[currentQuestion.id] === option
+                          ? 'border-blue-500 bg-blue-50 text-blue-700'
+                          : 'border-gray-200 hover:border-gray-300'
+                          }`}>
                           <div className="text-2xl font-bold mb-2">{index + 1}</div>
                           <div className="text-sm">{option}</div>
                         </div>
@@ -373,11 +381,10 @@ const Questionnaire = () => {
                 <button
                   onClick={handlePrevious}
                   disabled={currentStep === 0}
-                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                    currentStep === 0
-                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  }`}
+                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${currentStep === 0
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    }`}
                 >
                   Previous
                 </button>
@@ -386,11 +393,10 @@ const Questionnaire = () => {
                   <button
                     onClick={handleSubmit}
                     disabled={!canProceed}
-                    className={`px-8 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center ${
-                      canProceed
-                        ? 'bg-gradient-to-r from-blue-500 to-green-500 text-white hover:from-blue-600 hover:to-green-600'
-                        : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    }`}
+                    className={`px-8 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center ${canProceed
+                      ? 'bg-gradient-to-r from-blue-500 to-green-500 text-white hover:from-blue-600 hover:to-green-600'
+                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      }`}
                   >
                     Complete Assessment
                     <ArrowRight className="w-5 h-5 ml-2" />
@@ -399,11 +405,10 @@ const Questionnaire = () => {
                   <button
                     onClick={handleNext}
                     disabled={!canProceed}
-                    className={`px-8 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center ${
-                      canProceed
-                        ? 'bg-gradient-to-r from-blue-500 to-green-500 text-white hover:from-blue-600 hover:to-green-600'
-                        : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    }`}
+                    className={`px-8 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center ${canProceed
+                      ? 'bg-gradient-to-r from-blue-500 to-green-500 text-white hover:from-blue-600 hover:to-green-600'
+                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      }`}
                   >
                     Next
                     <ArrowRight className="w-5 h-5 ml-2" />
@@ -419,7 +424,7 @@ const Questionnaire = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -427,7 +432,7 @@ const Questionnaire = () => {
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Why This Assessment Matters</h2>
               <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
-                This assessment helps us understand your unique situation and match you with the right 
+                This assessment helps us understand your unique situation and match you with the right
                 therapist and treatment approach for your specific needs.
               </p>
 

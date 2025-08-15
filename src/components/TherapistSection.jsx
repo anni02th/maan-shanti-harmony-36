@@ -1,6 +1,7 @@
 import { Star, Award, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+
 import therapist1 from "@/assets/therapist-1.jpg";
 import therapist2 from "@/assets/therapist-2.jpg";
 import therapist3 from "@/assets/therapist-3.jpg";
@@ -48,7 +49,6 @@ const TherapistSection = () => {
     },
   ];
 
-  // Animation variants
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0 },
@@ -69,21 +69,22 @@ const TherapistSection = () => {
           <motion.h2
             variants={fadeUp}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6"
           >
-            Meet Our Expert <span className="text-blue-600">Therapists</span>
+            Meet Our Expert{" "}
+            <span className="text-teal-primary">Therapists</span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
           >
             Our licensed therapists are here to help you on your journey to better mental health.
             Each specialist brings unique expertise and compassionate care.
           </motion.p>
         </motion.div>
 
-        {/* Therapist Cards Grid */}
+        {/* Therapist Cards */}
         <motion.div
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial="hidden"
@@ -99,34 +100,33 @@ const TherapistSection = () => {
               variants={fadeUp}
               transition={{ duration: 0.6, ease: "easeOut" }}
               whileHover={{ scale: 1.03 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-3xl p-6 shadow-card hover:shadow-soft transition-all duration-300 border border-border/20 group"
             >
               {/* Therapist Image */}
-              <div className="relative">
-                <div className="w-full h-48 bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
-                  <div className="text-white text-center">
-                    <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-2xl font-bold">{therapist.name.split(' ')[1][0]}</span>
-                    </div>
-                    <p className="text-sm opacity-90">Professional Photo</p>
-                  </div>
+              <div className="relative mb-6">
+                <div className="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-teal-light/50 group-hover:ring-teal-primary/30 transition-all duration-300">
+                  <img
+                    src={therapist.image}
+                    alt={therapist.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-
                 {/* Availability Badge */}
                 <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium border border-green-200">
+                  <div className="bg-green-soft text-teal-dark px-3 py-1 rounded-full text-xs font-medium border border-green-soft/50">
                     {therapist.availability}
                   </div>
                 </div>
               </div>
 
-              {/* Therapist Info */}
-              <div className="text-center space-y-4 p-6">
+              {/* Info */}
+              <div className="text-center space-y-4">
+                {/* Name & Specialization */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  <h3 className="text-xl font-bold text-foreground font-heading mb-1">
                     {therapist.name}
                   </h3>
-                  <p className="text-blue-600 font-medium">
+                  <p className="text-teal-primary font-medium">
                     {therapist.specialization}
                   </p>
                 </div>
@@ -139,13 +139,13 @@ const TherapistSection = () => {
                         key={i}
                         className={`w-4 h-4 ${
                           i < Math.floor(therapist.rating)
-                            ? "text-yellow-400 fill-current"
+                            ? "text-yellow-soft fill-current"
                             : "text-gray-300"
                         }`}
                       />
                     ))}
                   </div>
-                  <span className="text-sm font-medium text-gray-900">
+                  <span className="text-sm font-medium text-foreground">
                     {therapist.rating} ({therapist.reviews} reviews)
                   </span>
                 </div>
@@ -153,14 +153,14 @@ const TherapistSection = () => {
                 {/* Experience & Credentials */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-center space-x-2">
-                    <Clock className="w-4 h-4 text-blue-600" />
-                    <span className="text-sm text-gray-600">
+                    <Clock className="w-4 h-4 text-teal-primary" />
+                    <span className="text-sm text-muted-foreground">
                       {therapist.experience}
                     </span>
                   </div>
                   <div className="flex items-center justify-center space-x-2">
-                    <Award className="w-4 h-4 text-blue-600" />
-                    <span className="text-sm text-gray-600">
+                    <Award className="w-4 h-4 text-teal-primary" />
+                    <span className="text-sm text-muted-foreground">
                       {therapist.credentials.join(", ")}
                     </span>
                   </div>
@@ -171,7 +171,7 @@ const TherapistSection = () => {
                   {therapist.languages.map((lang, index) => (
                     <span
                       key={index}
-                      className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full"
+                      className="px-2 py-1 bg-teal-light/50 text-teal-dark text-xs rounded-full"
                     >
                       {lang}
                     </span>
@@ -179,14 +179,14 @@ const TherapistSection = () => {
                 </div>
 
                 {/* Approach */}
-                <p className="text-sm text-gray-600 italic">
+                <p className="text-sm text-muted-foreground italic">
                   "{therapist.approach}"
                 </p>
 
-                {/* CTA Button */}
-                <Link 
+                {/* CTA */}
+                <Link
                   to={`/therapists/${therapist.id}`}
-                  className="block w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 px-6 rounded-xl font-medium hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg"
+                  className="block w-full bg-teal-primary text-white py-3 px-6 rounded-xl font-medium hover:bg-teal-dark transition-colors duration-300 shadow-button"
                 >
                   View Profile
                 </Link>
@@ -205,7 +205,7 @@ const TherapistSection = () => {
           >
             <Link
               to="/therapists"
-              className="inline-block bg-white text-blue-600 border-2 border-blue-600 py-3 px-8 rounded-xl font-medium hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-lg"
+              className="inline-block bg-white text-teal-primary border-2 border-teal-primary py-3 px-8 rounded-xl font-medium hover:bg-teal-primary hover:text-white transition-all duration-300 shadow-soft"
             >
               View All Therapists
             </Link>
@@ -216,4 +216,4 @@ const TherapistSection = () => {
   );
 };
 
-export default TherapistSection; 
+export default TherapistSection;

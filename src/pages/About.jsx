@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Heart, Target, Users, Award, Shield, Globe } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import about_img from "../assets/header-about.jpg";
 
 const About = () => {
   const teamMembers = [
@@ -51,30 +52,40 @@ const About = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="pt-24 pb-16 bg-gradient-hero"
+        className="pt-24 pb-16 relative overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1 
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-no-repeat bg-left lg:bg-center"
+          style={{ backgroundImage: `url(${about_img})` }}
+        ></div>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
+
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-6xl font-bold text-foreground mb-6 font-heading"
+            className="text-5xl md:text-6xl font-bold text-white mb-6 font-heading"
           >
             About Maan Shanti
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-muted-foreground max-w-3xl mx-auto"
+            className="text-xl text-white/90 max-w-3xl mx-auto"
           >
-            Dedicated to bringing peace and harmony to your mental well-being through compassionate, 
+            Dedicated to bringing peace and harmony to your mental well-being through compassionate,
             evidence-based therapy and holistic healing approaches.
           </motion.p>
         </div>
@@ -84,7 +95,7 @@ const About = () => {
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -94,14 +105,14 @@ const About = () => {
                 <Target className="w-16 h-16 mb-6" />
                 <h2 className="text-3xl font-bold mb-4 font-heading">Our Mission</h2>
                 <p className="text-lg leading-relaxed">
-                  To provide accessible, high-quality mental health care that empowers individuals 
-                  to overcome challenges, build resilience, and live fulfilling lives. We believe 
+                  To provide accessible, high-quality mental health care that empowers individuals
+                  to overcome challenges, build resilience, and live fulfilling lives. We believe
                   everyone deserves support on their journey to mental wellness.
                 </p>
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -111,8 +122,8 @@ const About = () => {
                 <Award className="w-16 h-16 mb-6" />
                 <h2 className="text-3xl font-bold mb-4 font-heading">Our Vision</h2>
                 <p className="text-lg leading-relaxed">
-                  A world where mental health is prioritized, stigma is eliminated, and everyone 
-                  has access to the support they need to thrive. We envision communities built 
+                  A world where mental health is prioritized, stigma is eliminated, and everyone
+                  has access to the support they need to thrive. We envision communities built
                   on understanding, compassion, and emotional well-being.
                 </p>
               </div>
@@ -124,7 +135,7 @@ const About = () => {
       {/* Values Section */}
       <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -159,7 +170,7 @@ const About = () => {
       {/* Team Section */}
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}

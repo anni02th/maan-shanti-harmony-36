@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import { Button } from "../components/ui/button";
+import heroImg from "../assets/header-contact.jpg"; // ✅ Make sure this file exists in src/assets
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -19,25 +20,35 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
     console.log("Form submitted:", formData);
   };
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <div className="bg-gradient-hero py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 font-heading">
+      {/* Hero Section with Background Image */}
+      <div className="pt-24 pb-16 relative overflow-hidden">
+        {/* Background Image Layer */}
+        <div
+          className="absolute inset-0 bg-cover bg-no-repeat bg-right md:bg-bottom"
+          style={{ backgroundImage: `url(${heroImg})` }}
+        ></div>
+
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/30"></div>
+
+        {/* Content Layer */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-heading">
             Get in Touch
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto shadow-sm">
             We're here to help and answer any questions you might have. 
             We look forward to hearing from you.
           </p>
         </div>
       </div>
 
+      {/* Contact Info + Form */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Information */}
@@ -82,7 +93,9 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground mb-1">Visit Us</h3>
-                  <p className="text-muted-foreground">123 Wellness Street, Mumbai, Maharashtra</p>
+                  <p className="text-muted-foreground">
+                    123 Wellness Street, Mumbai, Maharashtra
+                  </p>
                   <p className="text-sm text-muted-foreground">By appointment only</p>
                 </div>
               </div>
@@ -106,7 +119,6 @@ const Contact = () => {
             <h3 className="text-2xl font-bold text-foreground mb-6 font-heading">
               Send us a Message
             </h3>
-            
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -124,7 +136,7 @@ const Contact = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                     Email Address
@@ -174,72 +186,15 @@ const Contact = () => {
                 />
               </div>
 
-              <Button 
-                type="submit" 
-                variant="hero" 
+              <Button
+                type="submit"
+                variant="hero"
                 className="w-full py-3 text-lg rounded-lg flex items-center justify-center space-x-2"
               >
                 <Send className="w-5 h-5" />
                 <span>Send Message</span>
               </Button>
             </form>
-          </div>
-        </div>
-
-        {/* FAQ Section */}
-        <div className="mt-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4 font-heading">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Quick answers to common questions
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-card rounded-xl p-6 border border-border">
-              <h3 className="text-lg font-semibold text-foreground mb-3">
-                How do I book my first session?
-              </h3>
-              <p className="text-muted-foreground">
-                You can book your first session through our online booking system, 
-                by calling us directly, or by filling out the contact form above. 
-                We'll get back to you within 24 hours to confirm your appointment.
-              </p>
-            </div>
-
-            <div className="bg-card rounded-xl p-6 border border-border">
-              <h3 className="text-lg font-semibold text-foreground mb-3">
-                What should I expect in my first session?
-              </h3>
-              <p className="text-muted-foreground">
-                Your first session is an initial consultation where we'll discuss 
-                your needs, goals, and concerns. This helps us understand how 
-                best to support you and create a personalized treatment plan.
-              </p>
-            </div>
-
-            <div className="bg-card rounded-xl p-6 border border-border">
-              <h3 className="text-lg font-semibold text-foreground mb-3">
-                Do you offer online sessions?
-              </h3>
-              <p className="text-muted-foreground">
-                Yes, we offer both in-person and online therapy sessions. 
-                Online sessions are conducted through secure video platforms 
-                and are just as effective as in-person sessions.
-              </p>
-            </div>
-
-            <div className="bg-card rounded-xl p-6 border border-border">
-              <h3 className="text-lg font-semibold text-foreground mb-3">
-                What are your cancellation policies?
-              </h3>
-              <p className="text-muted-foreground">
-                We require 24 hours notice for session cancellations. 
-                This allows us to offer the slot to other clients who may be waiting.
-              </p>
-            </div>
           </div>
         </div>
       </div>

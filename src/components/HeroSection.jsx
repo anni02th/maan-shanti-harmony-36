@@ -1,199 +1,256 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import React, { useEffect, useState, useRef } from "react";
-import meditation from "@/assets/meditation.png";
-import shadow from "@/assets/shadow.png";
+import { Button } from "@/components/ui/button";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import React, { useRef } from "react";
+import classNames from "classnames";
 
-// ---- Animation styles for ovals ----
-const ovalStyles = `
-@keyframes rotate-cw {
-  to { transform: rotate(360deg); }
-}
-@keyframes rotate-ccw {
-  to { transform: rotate(-360deg); }
-}
-.oval-cw {
-  animation: rotate-cw 6s linear infinite;
-}
-.oval-ccw {
-  animation: rotate-ccw 8s linear infinite;
-}
-.oval-cw2 {
-  animation: rotate-cw 10s linear infinite;
-}
-`;
+// Import or define your emotion images here
+import anxietyPerson from "@/assets/anxiety-person-new.jpg";
+import depressionPerson from "@/assets/depression-person-new.jpg";
+import traumaPerson from "@/assets/trauma-person-new.jpg";
+import personalNeedsPerson from "@/assets/personal-needs-new.jpg";
 
-const TEMP_SIZE = 600;
-const NUM_CIRCLES = 10;
-const MIN_SIZE = 8;
-const MAX_SIZE = 24;
-const MAX_SPEED = 5;
+const emotionalStates = [
+  {
+    image: depressionPerson,
+    label: "Depressed",
+    bgColor: "bg-yellow-soft",
+    shape: "rounded-3xl",
+  },
+  {
+    image: anxietyPerson,
+    label: "Anxiety",
+    bgColor: "bg-green-soft",
+    shape: "rounded-full",
+  },
+  {
+    image: traumaPerson,
+    label: "Lost & Trauma",
+    bgColor: "bg-teal-light",
+    shape: "rounded-2xl",
+  },
+  {
+    image: personalNeedsPerson,
+    label: "Personal needs",
+    bgColor: "bg-orange-soft",
+    shape: "rounded-3xl",
+  },
+];
 
-const TempVisual = () => {
-  const [circles, setCircles] = useState(() =>
-    Array.from({ length: NUM_CIRCLES }, () => {
-      const angle = Math.random() * 2 * Math.PI;
-      const speed = Math.random() * MAX_SPEED * 0.5 + 0.05;
-      return {
-        x: Math.random() * TEMP_SIZE,
-        y: Math.random() * TEMP_SIZE,
-        size: MIN_SIZE + Math.random() * (MAX_SIZE - MIN_SIZE),
-        vx: speed * Math.cos(angle),
-        vy: speed * Math.sin(angle),
-      };
-    })
-  );
+// Variants for masked reveal with clip-path
+const maskedRevealVariants = {
+  hidden: { clipPath: "inset(0 100% 0 0)", opacity: 0 },
+  visible: {
+    clipPath: "inset(0 0% 0 0)",
+    opacity: 1,
+    transition: { duration: 1, ease: "easeInOut" },
+  },
+};
 
-  const circlesRef = useRef(circles);
-  circlesRef.current = circles;
+// Variants for entrance fade and slide
+const entranceVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
-  useEffect(() => {
-    let animationFrame;
+// Light sweep CSS effect for glass morphism
+const lightSweepStyle = {
+  position: "absolute",
+  top: 0,
+  left: "-75%",
+  width: "50%",
+  height: "100%",
+  background:
+    "linear-gradient(120deg, rgba(255,255,255,0.5) 0%, transparent 80%)",
+  transform: "skewX(-25deg)",
+  pointerEvents: "none",
+  animation: "sweep 10s infinite",
+};
 
-    const animate = () => {
-      setCircles(prev =>
-        prev.map(({ x, y, vx, vy, size }) => {
-          let newX = x + vx;
-          let newY = y + vy;
+// CSS keyframes injected globally for sweep animation
+const GlobalStyles = () => (
+  <style>{`
+    @keyframes sweep {
+      0% { left: -75%; }
+      100% { left: 125%; }
+    }
+  `}</style>
+);
 
-          if (newX < 0) { newX = 0; vx = -vx; }
-          else if (newX > TEMP_SIZE - size) { newX = TEMP_SIZE - size; vx = -vx; }
-          if (newY < 0) { newY = 0; vy = -vy; }
-          else if (newY > TEMP_SIZE - size) { newY = TEMP_SIZE - size; vy = -vy; }
+// Helper component for parallax + magnet effect on cards
+const ParallaxCard = ({ children }) => {
+  // Ref to get card bounds
+  const ref = useRef(null);
 
-          const angleChange = (Math.random() - 0.5) * 0.1;
-          let speed = Math.sqrt(vx * vx + vy * vy);
-          let angle = Math.atan2(vy, vx);
-          angle += angleChange;
-          vx = speed * Math.cos(angle);
-          vy = speed * Math.cos(angle);
+  // Motion values for cursor position relative to center of card
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-          if (speed > MAX_SPEED) {
-            speed = MAX_SPEED;
-            vx = speed * Math.cos(angle);
-            vy = speed * Math.sin(angle);
-          }
+  // Transform rotation based on cursor with clamp to small degrees
+  const rotateX = useTransform(y, [-30, 30], [7, -7]);
+  const rotateY = useTransform(x, [-30, 30], [-7, 7]);
 
-          return { x: newX, y: newY, vx, vy, size };
-        })
-      );
-      animationFrame = requestAnimationFrame(animate);
-    };
+  // Handler for mouse move to update x,y motion values for parallax
+  function handleMouseMove(event) {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const px = (event.clientX - rect.left) / rect.width; // 0 to 1
+    const py = (event.clientY - rect.top) / rect.height; // 0 to 1
 
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
-  }, []);
+    // Calculate normalized x,y from center -30 to +30 range
+    x.set((px - 0.5) * 60);
+    y.set((py - 0.5) * 60);
+  }
+
+  // Reset on mouse leave
+  function handleMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
 
   return (
-    <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 flex justify-center flex-col gap-16">
-      <style>{ovalStyles}</style>
-
-      {/* Rotating Ovals */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="oval-cw absolute"
-          style={{ width: "100%", height: "50%", borderRadius: "50% / 50%", border: "3px solid #81e6d9", opacity: 0.5 }} />
-        <div className="oval-ccw absolute"
-          style={{ width: "100%", height: "50%", borderRadius: "50% / 50%", border: "3px dashed #4fd1c5", opacity: 0.5 }} />
-        <div className="oval-cw2 absolute"
-          style={{ width: "100%", height: "50%", borderRadius: "50% / 50%", border: "3px solid #4fd1c5", opacity: 0.5 }} />
-      </div>
-
-      {/* Moving Circles */}
-      <div className="absolute pointer-events-none"
-        style={{ width: TEMP_SIZE, height: TEMP_SIZE, top: "-100px", left: "-100px" }}>
-        {circles.map(({ x, y, size }, i) => (
-          <div key={i}
-            style={{
-              position: "absolute",
-              width: size,
-              height: size,
-              borderRadius: "50%",
-              backgroundColor: "#81e6d9",
-              opacity: 0.75,
-              transform: `translate(${x}px, ${y}px)`,
-              transition: "transform 0.05s linear",
-            }} />
-        ))}
-      </div>
-
-      {/* Meditation image and shadow */}
-      <img src={meditation} alt="Meditation"
-        className="w-56 sm:w-72 md:w-96 mx-auto z-10 animate-float"
-        style={{ position: "relative" }} />
-      <img src={shadow} alt="Shadow"
-        className="bottom-0 w-40 sm:w-56 md:w-72 mx-auto animate-shadow"
-        style={{ position: "relative" }} />
-    </div>
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ rotateX, rotateY, perspective: 600 }}
+      className="will-change-transform"
+      tabIndex={0} // allow keyboard focus
+    >
+      {children(x, y)}
+    </motion.div>
   );
 };
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-14 gap-x-8 lg:gap-y-0 lg:gap-x-20 items-center">
-          
-          {/* Left Content */}
-          <motion.div
-            className="space-y-6 text-center lg:text-left"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
+    <>
+      <GlobalStyles />
+      <section className="min-h-screen bg-gradient-hero flex items-center py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-14 gap-x-8 lg:gap-y-0 lg:gap-x-20 items-center">
+            {/* Left Content */}
             <motion.div
-              className="inline-flex items-center px-4 py-2 bg-blue-100 border border-blue-200 rounded-full text-sm text-blue-800 font-medium"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              className="space-y-6 text-center lg:text-left max-w-4xl mx-auto"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              No.1 Mental Health Support Platform
+              <motion.div
+                className="inline-flex items-center px-4 py-2 bg-teal-light/50 border border-teal-primary/20 rounded-full text-sm text-teal-dark font-medium"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                No.1 Mental Health Support Platform
+              </motion.div>
+
+              <div className="space-y-4">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight font-heading">
+                  Deserve and<span className="text-teal-primary"> Embrace Your</span> Peace
+                </h1>
+                <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md mx-auto lg:mx-0">
+                  Feeling stressed, anxious or depressed? Check your mood and anxiety with our free online test. Online evidence-based programs to help improve the way you feel.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                <Button variant="hero" size="lg" className="rounded-xl px-8">
+                  Get Started
+                </Button>
+                <Button variant="hero-outline" size="lg" className="rounded-xl px-8">
+                  Log In
+                </Button>
+              </div>
             </motion.div>
 
-            <div className="space-y-4">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Deserve and<span className="text-blue-600"> Embrace Your</span> Peace
-              </h1>
-              <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-md mx-auto lg:mx-0">
-                Feeling stressed, anxious or depressed? Check your mood and anxiety with our free online test. Online evidence-based programs to help improve the way you feel.
-              </p>
-            </div>
+            {/* Right Section with Emotional States Grid */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.3 } },
+              }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative"
+            >
+              <div className="relative">
+                <div className="grid grid-cols-2 gap-4 md:gap-6">
+                  {emotionalStates.map((state, index) => (
+                    <ParallaxCard key={index}>
+                      {(xMotion, yMotion) => (
+                        <motion.div
+                          className={classNames(
+                            "relative p-4 md:p-6 shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer",
+                            state.bgColor,
+                            state.shape
+                          )}
+                          variants={maskedRevealVariants}
+                          initial="hidden"
+                          animate="visible"
+                          whileHover={{ scale: 1.1, rotate: 3 }}
+                          transition={{ duration: 0.4, ease: "easeOut" }}
+                        >
+                          {/* Label Tag */}
+                          <div className="absolute -top-3 left-4 bg-white px-3 py-1 rounded-full text-xs font-medium text-foreground shadow-soft border border-border/20">
+                            {state.label}
+                          </div>
 
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-              <Link
-                to="/questionnaire"
-                className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 text-center"
-              >
-                Take Assessment
-              </Link>
-              <Link
-                to="/auth"
-                className="border-2 border-blue-500 text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-colors text-center"
-              >
-                Get Started
-              </Link>
-            </div>
+                          {/* Image with light sweep and magnet effect */}
+                          <motion.div
+                            style={{
+                              x: xMotion,
+                              y: yMotion,
+                              originX: 0.5,
+                              originY: 0.5,
+                              position: "relative",
+                              borderRadius: 12,
+                              overflow: "hidden",
+                            }}
+                            className="rounded-xl"
+                          >
+                            {/* Image */}
+                            <img
+                              src={state.image}
+                              alt={state.label}
+                              className="w-full h-full object-cover"
+                              draggable={false}
+                            />
+                            {/* Light sweep effect */}
+                            <div style={lightSweepStyle} />
+                          </motion.div>
+                        </motion.div>
+                      )}
+                    </ParallaxCard>
+                  ))}
+                </div>
 
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4 text-sm text-gray-600">
-              <Link to="/services" className="hover:text-blue-600 transition-colors">Our Services</Link>
-              <span>•</span>
-              <Link to="/therapists" className="hover:text-blue-600 transition-colors">Find Therapists</Link>
-              <span>•</span>
-              <Link to="/about" className="hover:text-blue-600 transition-colors">About Us</Link>
-            </div>
-          </motion.div>
-
-          {/* Right Section with TempVisual */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex justify-center mt-10 lg:mt-0"
-          >
-            <TempVisual />
-          </motion.div>
+                {/* Decorative rotating and floating elements */}
+                <motion.div
+                  className="absolute -top-4 -right-4 w-8 h-8 border-2 border-teal-primary rounded rotate-45 opacity-60"
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+                />
+                <motion.div
+                  className="absolute -bottom-6 -left-6 w-6 h-6 bg-orange-soft rounded-full opacity-70"
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                />
+                <motion.div
+                  className="absolute top-1/2 -right-8 w-4 h-4 bg-yellow-soft rounded-full opacity-60"
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

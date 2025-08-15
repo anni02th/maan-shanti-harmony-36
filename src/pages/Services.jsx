@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Brain, Heart, Users, Shield, BookOpen, Clock, Star, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import service_img from "../assets/header-service.jpg";
 
 const Services = () => {
   const services = [
@@ -120,30 +121,38 @@ const Services = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="pt-24 pb-16 bg-gradient-hero"
+        className="pt-24 pb-16 bg-gradient-hero relative overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1 
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-no-repeat bg-left lg:bg-center"
+          style={{ backgroundImage: `url(${service_img})` }}
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/30 z-10"></div>
+        {/* Content */}
+        <div className="relative z-20 max-w-7xl mx-auto px-4 text-center">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-6xl font-bold text-foreground mb-6 font-heading"
+            className="text-5xl md:text-6xl font-bold text-white mb-6 font-heading"
           >
             Our Services
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-muted-foreground max-w-3xl mx-auto"
+            className="text-xl text-white/90 max-w-3xl mx-auto"
           >
-            Comprehensive mental health services tailored to your unique needs. 
+            Comprehensive mental health services tailored to your unique needs.
             From individual therapy to specialized programs, we're here to support your journey to wellness.
           </motion.p>
         </div>
@@ -151,7 +160,7 @@ const Services = () => {
 
       {/* Services Categories */}
       <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4">
           {services.map((category, categoryIndex) => (
             <motion.div
               key={categoryIndex}
@@ -167,42 +176,44 @@ const Services = () => {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {category.services.map((service, serviceIndex) => (
-                  <motion.div
-                    key={serviceIndex}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: serviceIndex * 0.1 }}
-                    viewport={{ once: true }}
-                    className="bg-card rounded-2xl shadow-card p-6 hover:shadow-lg transition-all duration-300 border border-border"
-                  >
-                    <div className="flex items-center mb-4">
-                      <div className="p-3 bg-gradient-teal rounded-xl">
-                        <service.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="ml-4">
-                        <h3 className="text-xl font-semibold text-foreground">{service.name}</h3>
-                        <p className="text-sm text-muted-foreground">{service.duration} • {service.price}</p>
-                      </div>
-                    </div>
-                    
-                    <p className="text-muted-foreground mb-4">{service.description}</p>
-                    
-                    <div className="space-y-2 mb-4">
-                      {service.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-center text-sm text-muted-foreground">
-                          <div className="w-2 h-2 bg-teal-primary rounded-full mr-3"></div>
-                          {feature}
+                {category.services.map((service, idx) => {
+                  const Icon = service.icon;
+                  return (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: idx * 0.1 }}
+                      viewport={{ once: true }}
+                      className="bg-card rounded-2xl shadow-card p-6 hover:shadow-lg transition-all duration-300 border border-border"
+                    >
+                      <div className="flex items-center mb-4">
+                        <div className="p-3 bg-gradient-teal rounded-xl">
+                          <Icon className="w-6 h-6 text-white" />
                         </div>
-                      ))}
-                    </div>
-
-                    <button className="w-full bg-gradient-teal text-white py-3 px-4 rounded-xl font-medium hover:bg-teal-dark transition-all duration-300 flex items-center justify-center">
-                      Learn More
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </button>
-                  </motion.div>
-                ))}
+                        <div className="ml-4">
+                          <h3 className="text-xl font-semibold text-foreground">{service.name}</h3>
+                          <p className="text-sm text-muted-foreground">
+                            {service.duration} • {service.price}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-muted-foreground mb-4">{service.description}</p>
+                      <div className="space-y-2 mb-4">
+                        {service.features.map((feature, fIdx) => (
+                          <div key={fIdx} className="flex items-center text-sm text-muted-foreground">
+                            <div className="w-2 h-2 bg-teal-primary rounded-full mr-3"></div>
+                            {feature}
+                          </div>
+                        ))}
+                      </div>
+                      <button className="w-full bg-gradient-teal text-white py-3 px-4 rounded-xl font-medium hover:bg-teal-dark transition-all flex items-center justify-center">
+                        Learn More
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </button>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
@@ -211,8 +222,8 @@ const Services = () => {
 
       {/* Additional Services */}
       <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -226,49 +237,52 @@ const Services = () => {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {additionalServices.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-card p-6 rounded-xl shadow-card hover:shadow-lg transition-shadow text-center border border-border"
-              >
-                <div className="w-16 h-16 bg-gradient-teal rounded-full flex items-center justify-center mx-auto mb-4">
-                  <service.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{service.name}</h3>
-                <p className="text-muted-foreground text-sm">{service.description}</p>
-              </motion.div>
-            ))}
+            {additionalServices.map((srv, idx) => {
+              const Icon = srv.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-card p-6 rounded-xl shadow-card hover:shadow-lg transition-shadow text-center border border-border"
+                >
+                  <div className="w-16 h-16 bg-gradient-teal rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">{srv.name}</h3>
+                  <p className="text-muted-foreground text-sm">{srv.description}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA */}
       <section className="py-20 bg-gradient-teal">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div 
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="text-4xl font-bold text-white mb-6 font-heading"
           >
-            <h2 className="text-4xl font-bold text-white mb-6 font-heading">Ready to Start Your Journey?</h2>
-            <p className="text-xl text-teal-light mb-8 max-w-2xl mx-auto">
-              Take the first step towards better mental health. Our team is here to guide you 
-              through every step of your wellness journey.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-teal-primary py-4 px-8 rounded-xl font-semibold hover:bg-gray-100 transition-colors">
-                Book a Consultation
-              </button>
-              <button className="border-2 border-white text-white py-4 px-8 rounded-xl font-semibold hover:bg-white hover:text-teal-primary transition-colors">
-                Learn More
-              </button>
-            </div>
-          </motion.div>
+            Ready to Start Your Journey?
+          </motion.h2>
+          <p className="text-xl text-teal-light mb-8 max-w-2xl mx-auto">
+            Take the first step towards better mental health. Our team is here to guide you through every step of your wellness journey.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-white text-teal-primary py-4 px-8 rounded-xl font-semibold hover:bg-gray-100 transition-colors">
+              Book a Consultation
+            </button>
+            <button className="border-2 border-white text-white py-4 px-8 rounded-xl font-semibold hover:bg-white hover:text-teal-primary transition-colors">
+              Learn More
+            </button>
+          </div>
         </div>
       </section>
 
@@ -277,4 +291,4 @@ const Services = () => {
   );
 };
 
-export default Services; 
+export default Services;
