@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Search, MessageSquare, Laptop } from "lucide-react";
-import therapySession from "@/assets/therapy-session.jpg";
+import therapySession from "@/assets/therapy-session2.png";
 
 const ProcessSection = () => {
   const steps = [

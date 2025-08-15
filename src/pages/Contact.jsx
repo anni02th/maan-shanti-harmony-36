@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import { Button } from "../components/ui/button";
 import heroImg from "../assets/header-contact.jpg"; // ✅ Make sure this file exists in src/assets
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +27,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       {/* Hero Section with Background Image */}
       <div className="pt-24 pb-16 relative overflow-hidden">
         {/* Background Image Layer */}
@@ -198,6 +201,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
