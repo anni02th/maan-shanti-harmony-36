@@ -19,7 +19,7 @@ const TherapistProfile = () => {
     location: "New York, NY",
     languages: ["English", "Spanish"],
     issues: ["Anxiety", "Depression", "Trauma", "PTSD", "Stress Management"],
-    rating: 4.9,
+    rating: 4.5,
     reviews: 127,
     experience: "15+ years",
     availability: "Mon-Fri, 9AM-6PM",

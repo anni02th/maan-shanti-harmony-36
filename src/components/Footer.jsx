@@ -10,10 +10,9 @@ const Footer = () => {
       title: "Services",
       links: [
         { name: "Individual Therapy", href: "/services" },
-        { name: "Couples Counseling", href: "/services" },
+        { name: "Speech Therapy", href: "/services" },
         { name: "Family Therapy", href: "/services" },
-        { name: "Group Sessions", href: "/services" },
-        { name: "Crisis Support", href: "/services" },
+        { name: "Special Educator", href: "/services" },
       ]
     },
     {
@@ -148,7 +147,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row items-center justify-between text-center md:text-left">
             <div className="mb-2 md:mb-0">
-              <span className="font-semibold">24/7 Crisis Support: </span>
+              <span className="font-semibold">24/7 Special educator: </span>
               <span>If you're having thoughts of self-harm, please reach out immediately.</span>
             </div>
             <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">

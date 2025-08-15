@@ -14,7 +14,7 @@ const TherapistSection = () => {
       image: therapist1,
       specialization: "Anxiety & Depression Specialist",
       experience: "8 years experience",
-      rating: 4.9,
+      rating: 4.5,
       reviews: 127,
       credentials: ["PhD Psychology", "Licensed Therapist"],
       languages: ["English", "Hindi", "Punjabi"],

@@ -97,7 +97,7 @@ export default function ReviewsPage() {
   const [statsRef, statsVisible] = useScrollAnimation();
 
   // Counter values
-  const rating = useCountUp(4.9, 1500, statsVisible);
+  const rating = useCountUp(4.5, 1500, statsVisible);
   const clients = useCountUp(2500, 1500, statsVisible);
   const success = useCountUp(95, 1500, statsVisible);
 
