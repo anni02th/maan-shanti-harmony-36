@@ -233,7 +233,7 @@ const HeroSection = () => {
                           transition={{ duration: 0.4, ease: "easeOut" }}
                         >
                           {/* Label Tag */}
-                          <div className="absolute -top-3 left-4 bg-white px-3 py-1 rounded-full text-xs font-medium text-foreground shadow-soft border border-border/20">
+                          <div className="absolute -top-1 left-4 bg-white px-3 py-1 rounded-full text-xs font-medium text-foreground shadow-soft border border-border/20">
                             {state.label}
                           </div>
 
