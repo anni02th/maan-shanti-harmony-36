@@ -17,7 +17,7 @@ const BookAppointment = () => {
       id: 1,
       name: "Dr. Sarah Johnson",
       specialization: "Clinical Psychologist",
-      rating: 4.9,
+      rating: 4.5,
       experience: "15+ years",
       price: "$150",
       image: "/src/assets/therapist-1.jpg",
