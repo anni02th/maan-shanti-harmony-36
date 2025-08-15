@@ -3,6 +3,7 @@ import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-mo
 import React, { useRef,useState, useEffect } from "react";
 import {  } from "react";
 import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
 
 // Import or define your emotion images here
 import anxietyPerson from "@/assets/anxiety-person-new.jpg";
@@ -129,6 +130,7 @@ const words = ["Embrace Your", "Feel Your", "See Your", "Learn About"];
 
 const HeroSection = () => {
     const [index, setIndex] = useState(0);
+    const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -182,12 +184,23 @@ const HeroSection = () => {
       </div>
 
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-                <Button variant="hero" size="lg" className="rounded-xl px-8">
-                  Get Started
-                </Button>
-                <Button variant="hero-outline" size="lg" className="rounded-xl px-8">
-                  Log In
-                </Button>
+                  <Button
+                    variant="hero"
+                    size="lg"
+                    className="rounded-xl px-8"
+                    onClick={() => navigate("/questionnaire")}
+                  >
+                    Get Started
+                  </Button>
+                  
+                  <Button
+                    variant="hero-outline"
+                    size="lg"
+                    className="rounded-xl px-8"
+                    onClick={() => navigate("/auth")}
+                  >
+                    Log In
+                  </Button>
               </div>
             </motion.div>
 
@@ -220,7 +233,7 @@ const HeroSection = () => {
                           transition={{ duration: 0.4, ease: "easeOut" }}
                         >
                           {/* Label Tag */}
-                          <div className="absolute -top-1 left-4 bg-white px-3 py-1 rounded-full text-xs font-medium text-foreground shadow-soft border border-border/20">
+                          <div className="absolute -top-3 left-4 bg-white px-3 py-1 rounded-full text-xs font-medium text-foreground shadow-soft border border-border/20">
                             {state.label}
                           </div>
 

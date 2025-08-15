@@ -19,7 +19,7 @@ const Therapists = () => {
       location: "New York, NY",
       languages: ["English", "Spanish"],
       issues: ["Anxiety", "Depression", "Trauma"],
-      rating: 4.9,
+      rating: 4.5,
       reviews: 127,
       experience: "15+ years",
       availability: "Mon-Fri, 9AM-6PM",
@@ -79,7 +79,7 @@ const Therapists = () => {
       location: "Seattle, WA",
       languages: ["English", "Korean"],
       issues: ["Creative Expression", "Trauma", "Self-Discovery"],
-      rating: 4.9,
+      rating: 4.5,
       reviews: 67,
       experience: "10+ years",
       availability: "Mon-Sat, 11AM-8PM",
@@ -146,7 +146,7 @@ const Therapists = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-6xl font-bold text-white mb-6 font-heading"
           >
-            Find Your Therapist
+            Join the Journey
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
