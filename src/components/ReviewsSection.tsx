@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
@@ -61,11 +61,9 @@ const reviews = [
 // Duplicate for seamless loop
 const duplicatedReviews = [...reviews, ...reviews];
 
-const ReviewCard = ({ name, review, rating, age, location, therapist, condition, duration, onHover, onLeave }) => (
+const ReviewCard = ({ name, review, rating, age, location, therapist, condition, duration }) => (
   <div
-    onMouseEnter={onHover}
-    onMouseLeave={onLeave}
-    className="min-w-[460px] max-w-xs bg-white rounded-3xl p-8 shadow-lg border border-gray-200 relative mx-3 flex-shrink-0 cursor-pointer hover:border-teal-500 transition-all duration-300 ease-in-out"
+    className="min-w-[460px] max-w-xs bg-white rounded-3xl p-8  border border-gray-200 relative mx-3 flex-shrink-0 cursor-pointer hover:border-teal-500 transition-all duration-300 ease-in-out"
   >
     <div className="absolute top-6 right-6 opacity-10">
       <Quote className="w-12 h-12 text-teal-500" />
@@ -105,13 +103,8 @@ const ReviewCard = ({ name, review, rating, age, location, therapist, condition,
 );
 
 const ReviewMarquee = () => {
-  const [isPaused, setIsPaused] = React.useState(false);
-
-  const handleMouseEnter = () => setIsPaused(true);
-  const handleMouseLeave = () => setIsPaused(false);
-
   return (
-    <section className="relative py-16 bg-teal-light/50 overflow-hidden">
+    <section className="relative py-16 bg-teal-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -125,8 +118,7 @@ const ReviewMarquee = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6"
           >
-            What Our{" "}
-            <span className="text-teal-primary">Clients Say</span>
+            What Our <span className="text-teal-600">Clients Say</span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
@@ -137,19 +129,16 @@ const ReviewMarquee = () => {
           </motion.p>
         </motion.div>
 
-        <div
-          className={`flex whitespace-nowrap gap-6 select-none ${isPaused ? "animation-paused" : "animate-marquee"}`}
-          style={{ minWidth: "200%" }}
-          onMouseEnter={handleMouseEnter}   // <-- Moved here
-          onMouseLeave={handleMouseLeave}   // <-- Moved here
-        >
-          {duplicatedReviews.map((review, index) => (
-            <ReviewCard
-              key={index}
-              {...review}
-            // Remove onHover/onLeave from individual cards
-            />
-          ))}
+        <div className="group overflow-hidden relative">
+          <div className="flex whitespace-nowrap gap-6 animate-marquee group-hover:animation-paused" style={{ minWidth: "200%" }}>
+            {duplicatedReviews.map((review, index) => (
+              <ReviewCard key={index} {...review} />
+            ))}
+          </div>
+
+          {/* gradient edges */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-teal-50 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-teal-50 to-transparent" />
         </div>
       </div>
 
@@ -159,17 +148,14 @@ const ReviewMarquee = () => {
           100% { transform: translateX(-50%); }
         }
         .animate-marquee {
-          animation: marquee 15s linear infinite;
+          animation: marquee 20s linear infinite;
         }
-        .animation-paused {
-          animation-play-state: paused !important;
+        .group:hover .animate-marquee {
+          animation-play-state: paused;
         }
       `}</style>
     </section>
   );
 };
-
-
-
 
 export default ReviewMarquee;
