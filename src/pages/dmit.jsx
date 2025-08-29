@@ -145,96 +145,102 @@ export default function DMITPage() {
 
             {/* Test Options */}
             <section className="container py-16 md:p-16 text-center">
-                <motion.h2 // Fade-in for the heading
-                    className="text-5xl font-bold mb-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                >
-                    Choose Your Test
-                </motion.h2>
-                <motion.div // Fade-in for the divider
-                    className="w-24 h-1 bg-gradient-teal mx-auto mb-16"
-                    initial={{ opacity: 0, scaleX: 0 }}
-                    whileInView={{ opacity: 1, scaleX: 1 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                ></motion.div>
-                <div className="grid md:grid-cols-3 gap-10">
-                    <motion.div // 2. Card Hover Effect & Scroll-in
-                        className="shadow-card"
-                        whileHover={{ translateY: -5, boxShadow: "0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)" }}
-                        transition={{ duration: 0.2 }}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <Card className="p-6">
-                            <CardContent className="space-y-4">
-                                <img
-                                    src={aptitudeIcon}
-                                    alt="Aptitude Icon"
-                                    className="w-24 h-24 mx-auto"
-                                />
-                                <h3 className="text-2xl font-semibold">Aptitude Test</h3>
-                                <p className="text-muted-foreground text-md">
-                                    Measure problem-solving, logical reasoning, and analytical skills.
-                                </p>
-                                <Button className="mt-8 shadow-button text-md" onClick={handleStartTest}>Start Test</Button>
-                            </CardContent>
-                        </Card>
-                    </motion.div>
-                    <motion.div // 2. Card Hover Effect & Scroll-in
-                        className="shadow-card"
-                        whileHover={{ translateY: -5, boxShadow: "0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)" }}
-                        transition={{ duration: 0.2 }}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <Card className="p-6">
-                            <CardContent className="space-y-4">
-                                <img
-                                    src={IQ}
-                                    alt="IQ Icon"
-                                    className="w-24 h-24 mx-auto"
-                                />
-                                <h3 className="text-2xl font-semibold">IQ Test</h3>
-                                <p className="text-muted-foreground text-md">
-                                    Understand your intelligence quotient with puzzles & tasks.
-                                </p>
-                                <Button className="mt-4 shadow-button">Start Test</Button>
-                            </CardContent>
-                        </Card>
-                    </motion.div>
-                    <motion.div // 2. Card Hover Effect & Scroll-in
-                        className="shadow-card"
-                        whileHover={{ translateY: -5, boxShadow: "0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)" }}
-                        transition={{ duration: 0.2 }}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <Card className="p-6">
-                            <CardContent className="space-y-4">
-                                <img
-                                    src={FingerprintImg}
-                                    alt="Fingerprint Icon"
-                                    className="w-24 h-24 mx-auto object-contain"
-                                />
-                                <h3 className="text-2xl font-semibold">DMIT</h3>
-                                <p className="text-muted-foreground text-md">
-                                    Analyze fingerprint patterns for insights into intelligence and learning styles.
-                                </p>
-                                <Button variant="outline" className="mt-4" onClick={handleStartTest}>
-                                    Learn More
-                                </Button>
-                            </CardContent>
-                        </Card>
-                    </motion.div>
-                </div>
-            </section>
+    <motion.h2
+        className="text-5xl font-bold mb-4"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true, amount: 0.5 }}
+    >
+        Choose Your Test
+    </motion.h2>
+    <motion.div
+        className="w-24 h-1 bg-gradient-teal mx-auto mb-16"
+        initial={{ opacity: 0, scaleX: 0 }}
+        whileInView={{ opacity: 1, scaleX: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        viewport={{ once: true, amount: 0.5 }}
+    ></motion.div>
+    <div className="grid md:grid-cols-3 gap-10">
+        <motion.div
+            className="shadow-card h-full rounded-2xl bg-white overflow-hidden" // ADDED rounded-2xl, bg-white, and overflow-hidden here
+            whileHover={{ translateY: -5, boxShadow: "0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)" }}
+            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+        >
+            <Card className="p-6 h-full"> {/* REMOVED bg-white and rounded-2xl from Card */}
+                <CardContent className="space-y-4 flex flex-col justify-between h-full">
+                    <div className="space-y-4">
+                        <img
+                            src={aptitudeIcon}
+                            alt="Aptitude Icon"
+                            className="w-24 h-24 mx-auto"
+                        />
+                        <h3 className="text-2xl font-semibold">Aptitude Test</h3>
+                        <p className="text-muted-foreground text-md flex-grow">
+                            Measure problem-solving, logical reasoning, and analytical skills.
+                        </p>
+                    </div>
+                    <Button className="mt-8 shadow-button text-md" onClick={handleStartTest}>Start Test</Button>
+                </CardContent>
+            </Card>
+        </motion.div>
+        <motion.div
+            className="shadow-card h-full rounded-2xl bg-white overflow-hidden" // ADDED rounded-2xl, bg-white, and overflow-hidden here
+            whileHover={{ translateY: -5, boxShadow: "0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)" }}
+            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+        >
+            <Card className="p-6 h-full"> {/* REMOVED bg-white and rounded-2xl from Card */}
+                <CardContent className="space-y-4 flex flex-col justify-between h-full">
+                    <div className="space-y-4">
+                        <img
+                            src={IQ}
+                            alt="IQ Icon"
+                            className="w-24 h-24 mx-auto"
+                        />
+                        <h3 className="text-2xl font-semibold">IQ Test</h3>
+                        <p className="text-muted-foreground text-md flex-grow">
+                            Understand your intelligence quotient with puzzles & tasks.
+                        </p>
+                    </div>
+                    <Button className="mt-4 shadow-button" onClick={handleStartTest}>Start Test</Button>
+                </CardContent>
+            </Card>
+        </motion.div>
+        <motion.div
+            className="shadow-card h-full rounded-2xl bg-white overflow-hidden" // ADDED rounded-2xl, bg-white, and overflow-hidden here
+            whileHover={{ translateY: -5, boxShadow: "0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)" }}
+            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+        >
+            <Card className="p-6 h-full"> {/* REMOVED bg-white and rounded-2xl from Card */}
+                <CardContent className="space-y-4 flex flex-col justify-between h-full">
+                    <div className="space-y-4">
+                        <img
+                            src={FingerprintImg}
+                            alt="Fingerprint Icon"
+                            className="w-24 h-24 mx-auto object-contain"
+                        />
+                        <h3 className="text-2xl font-semibold">DMIT</h3>
+                        <p className="text-muted-foreground text-md flex-grow">
+                            Analyze fingerprint patterns for insights into intelligence and learning styles.
+                        </p>
+                    </div>
+                    <Button variant="outline" className="mt-4" onClick={handleStartTest}>
+                        Learn More
+                    </Button>
+                </CardContent>
+            </Card>
+        </motion.div>
+    </div>
+</section>
 
             {/* DMIT Info */}
             <section className="container py-16 md:p-16 grid md:grid-cols-2 gap-10 items-center">
