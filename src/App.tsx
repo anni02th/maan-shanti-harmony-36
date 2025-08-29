@@ -17,6 +17,7 @@ import BookAppointment from "./pages/BookAppointment";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Contact from "./pages/Contact";
+import DMITPage from "./pages/dmit";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,7 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/dmit" element={<DMITPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
