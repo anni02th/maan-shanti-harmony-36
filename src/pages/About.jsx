@@ -50,7 +50,7 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Section */}
@@ -60,10 +60,10 @@ const About = () => {
         transition={{ duration: 0.8 }}
         className="pt-24 pb-16 relative overflow-hidden"
       >
-        {/* Background Image */}
+        {/* Background Image - Updated to use a placeholder */}
         <div
           className="absolute inset-0 bg-cover bg-no-repeat bg-left lg:bg-center"
-          style={{ backgroundImage: `url(${about_img})` }}
+          style={{ backgroundImage: `url('https://placehold.co/1920x1080/a2d2ff/ffffff?text=About+Us')` }}
         ></div>
 
         {/* Overlay */}
@@ -77,7 +77,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-6xl font-bold text-white mb-6 font-heading"
           >
-            About Maan Shanti
+            About Our Mission
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -85,8 +85,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-white/90 max-w-3xl mx-auto"
           >
-            Dedicated to bringing peace and harmony to your mental well-being through compassionate,
-            evidence-based therapy and holistic healing approaches.
+            Dedicated to integrating mental wellness with career fulfillment, providing holistic support for a balanced and purposeful life.
           </motion.p>
         </div>
       </motion.div>
@@ -105,9 +104,7 @@ const About = () => {
                 <Target className="w-16 h-16 mb-6" />
                 <h2 className="text-3xl font-bold mb-4 font-heading">Our Mission</h2>
                 <p className="text-lg leading-relaxed">
-                  To provide accessible, high-quality mental health care that empowers individuals
-                  to overcome challenges, build resilience, and live fulfilling lives. We believe
-                  everyone deserves support on their journey to mental wellness.
+                  To empower individuals to achieve mental well-being and career satisfaction through accessible, high-quality, integrated guidance and support.
                 </p>
               </div>
             </motion.div>
@@ -122,9 +119,7 @@ const About = () => {
                 <Award className="w-16 h-16 mb-6" />
                 <h2 className="text-3xl font-bold mb-4 font-heading">Our Vision</h2>
                 <p className="text-lg leading-relaxed">
-                  A world where mental health is prioritized, stigma is eliminated, and everyone
-                  has access to the support they need to thrive. We envision communities built
-                  on understanding, compassion, and emotional well-being.
+                  A world where personal happiness and professional success are seen as interconnected, and everyone has the tools to nurture both.
                 </p>
               </div>
             </motion.div>
@@ -144,7 +139,7 @@ const About = () => {
           >
             <h2 className="text-4xl font-bold text-foreground mb-4 font-heading">Our Core Values</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              The principles that guide everything we do and every person we serve.
+              The principles that guide our integrated approach to your well-being and growth.
             </p>
           </motion.div>
 
@@ -179,7 +174,7 @@ const About = () => {
           >
             <h2 className="text-4xl font-bold text-foreground mb-4 font-heading">Meet Our Team</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Experienced professionals dedicated to your mental health and well-being.
+              Experienced professionals dedicated to your personal and professional growth.
             </p>
           </motion.div>
 
@@ -212,9 +207,9 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {[
-              { number: "5000+", label: "Lives Touched" },
-              { number: "50+", label: "Expert Therapists" },
-              { number: "95%", label: "Success Rate" },
+              { number: "5000+", label: "Paths Transformed" },
+              { number: "50+", label: "Expert Counselors" },
+              { number: "100+", label: "Holistic Programs" },
               { number: "24/7", label: "Support Available" }
             ].map((stat, index) => (
               <motion.div

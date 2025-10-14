@@ -27,8 +27,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-teal-light rounded-lg flex items-center justify-center shadow">
-              <div className="w-4 h-4 bg-teal-dark rounded-sm"></div>
+            <div className="w-8 h-8 flex items-center justify-center shadow">
+              <img src="logo.png" alt="" />
             </div>
             <Link to="/" className="text-xl font-bold text-white font-heading cursor-pointer tracking-wide">
               MaanShanti
