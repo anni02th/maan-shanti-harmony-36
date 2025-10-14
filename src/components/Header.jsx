@@ -16,7 +16,7 @@ const Header = () => {
     { name: "Advice", href: "/questionnaire" },
     { name: "Therapists", href: "/therapists" },
     { name: "Contact", href: "/contact" },
-    { name: "Career Counselling", href: "/career-counselling" }
+    { name: "Career Counselling", href: "/career-counselling" },
   ];
 
   const isActive = (path) => location.pathname === path;

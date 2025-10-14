@@ -17,7 +17,8 @@ import BookAppointment from "./pages/BookAppointment";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Contact from "./pages/Contact";
-// import CareerCounselling from "./pages/Dmit";
+import CareerCounselling from "./pages/dmit";
+
 const queryClient = new QueryClient();
 
 // ScrollToTop Component
@@ -53,7 +54,7 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/career-counselling" element={<CareerCounselling/>} />
+          <Route path="/career-counselling" element={<CareerCounselling />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

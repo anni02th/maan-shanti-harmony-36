@@ -4,6 +4,7 @@ import { Button } from "../components/ui/button";
 import heroImg from "../assets/header-contact.jpg"; // ✅ Make sure this file exists in src/assets
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,11 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <Header />
       {/* Hero Section with Background Image */}
-      <div className="pt-24 pb-16 relative overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="pt-24 pb-16 bg-gradient-hero relative overflow-hidden">
         {/* Background Image Layer */}
         <div
           className="absolute inset-0 bg-cover bg-no-repeat bg-right md:bg-bottom"
@@ -41,15 +46,24 @@ const Contact = () => {
 
         {/* Content Layer */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-heading">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-5xl md:text-6xl font-bold text-white mb-6 font-heading"
+          >
             Get in Touch
-          </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto shadow-sm">
-            We're here to help and answer any questions you might have. 
+          </motion.h1>
+          <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className="text-xl text-white/90 max-w-3xl mx-auto">
+            We're here to help and answer any questions you might have.
             We look forward to hearing from you.
-          </p>
+          </motion.p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Contact Info + Form */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -61,7 +75,7 @@ const Contact = () => {
                 Let's Start a Conversation
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Whether you have questions about our services, want to book an appointment, 
+                Whether you have questions about our services, want to book an appointment,
                 or just want to learn more about how we can help, we're here for you.
               </p>
             </div>
