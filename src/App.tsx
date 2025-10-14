@@ -17,7 +17,7 @@ import BookAppointment from "./pages/BookAppointment";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Contact from "./pages/Contact";
-import CareerCounselling from "./pages/Dmit";
+// import CareerCounselling from "./pages/Dmit";
 const queryClient = new QueryClient();
 
 // ScrollToTop Component
