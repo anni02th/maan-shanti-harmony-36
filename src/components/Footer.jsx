@@ -61,7 +61,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-8 min-h-screene">
+    <footer className="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-[] min-h-screene">
       {/* Main Footer Content */}
       <motion.div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
@@ -74,10 +74,10 @@ const Footer = () => {
           {/* Brand Section */}
           <motion.div variants={fadeUp} className="lg:col-span-2 space-y-6">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-md">
-                <Heart className="w-6 h-6 text-blue-500" />
+              <div className="w-10 h-10 flex items-center justify-center shadow-md">
+                <img src="logo.png" alt="" />
               </div>
-              <span className="text-2xl font-bold">MaanShanti</span>
+              <span className="text-2xl font-bold text-teal-primary">MaanShanti</span>
             </div>
 
             <p className="text-white/80 leading-relaxed max-w-md">

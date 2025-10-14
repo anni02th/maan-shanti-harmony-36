@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Search, MessageSquare, Laptop } from "lucide-react";
-import therapySession from "@/assets/therapy-session2.png";
 
 const ProcessSection = () => {
   const steps = [
@@ -114,11 +113,11 @@ const ProcessSection = () => {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="relative rounded-3xl overflow-hidden shadow-card group">
+            <div className="">
               <img
-                src={therapySession}
+                src="doc.png"
                 alt="Therapy session with elderly therapist and young client"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 rounded-3xl"
+                className="w-full h-full transition-transform duration-700 rounded-3xl"
               />
 
               {/* Overlay gradient */}
