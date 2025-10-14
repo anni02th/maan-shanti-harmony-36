@@ -77,7 +77,7 @@ const Footer = () => {
               <div className="w-10 h-10 flex items-center justify-center shadow-md">
                 <img src="logo.png" alt="" />
               </div>
-              <span className="text-2xl font-bold text-teal-primary">MaanShanti</span>
+              <span className="text-2xl font-bold text-gray-400">MaanShanti</span>
             </div>
 
             <p className="text-white/80 leading-relaxed max-w-md">
